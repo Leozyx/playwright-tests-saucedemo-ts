@@ -6,17 +6,22 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: playwright-secrets
+
 steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '18.x'
     displayName: 'Instalar Node.js'
 
+  - script: npm ci
+    displayName: 'Instalar dependências do projeto'
+
+  - script: npx playwright install --with-deps
+    displayName: 'Instalar Playwright'
+
   - script: |
-      npm ci
-      npx playwright install
-    displayName: 'Instalar dependências'
-
-  - script: npx playwright test
+      echo "Executando testes com login $LOGIN_USER"
+      npx playwright test
     displayName: 'Executar testes Playwright'
-
