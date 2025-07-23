@@ -1,5 +1,7 @@
 trigger:
-  - master
+  branches:
+    include:
+      - master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -8,10 +10,13 @@ steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '18.x'
-    displayName: 'Install Node.js'
+    displayName: 'Instalar Node.js'
 
   - script: |
       npm ci
       npx playwright install
-      npx playwright test
-    displayName: 'Install dependencies and run tests'
+    displayName: 'Instalar dependências'
+
+  - script: npx playwright test
+    displayName: 'Executar testes Playwright'
+
