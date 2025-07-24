@@ -15,7 +15,6 @@ steps:
       echo "LOGIN_PASSWORD definido? ${LOGIN_PASSWORD:+sim}"
     displayName: 'Verificar variáveis de ambiente'
 
-steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '18.x'
@@ -24,11 +23,9 @@ steps:
   - script: npm ci
     displayName: 'Instalar dependências do projeto'
 
-steps:
   - script: npx playwright install --with-deps
     displayName: 'Instalar Playwright'
 
   - script: |
-      echo "Executando testes com login $LOGIN_USER"
       npx playwright test
     displayName: 'Executar testes Playwright'
