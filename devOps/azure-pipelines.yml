@@ -25,3 +25,9 @@ steps:
       echo "Executando testes com login $LOGIN_USER"
       npx playwright test
     displayName: 'Executar testes Playwright'
+
+  - script: |
+      echo "LOGIN_USER: $LOGIN_USER"
+      echo "LOGIN_PASSWORD definido? ${LOGIN_PASSWORD:+sim}"
+    displayName: 'Verificar variáveis de ambiente'
+    
