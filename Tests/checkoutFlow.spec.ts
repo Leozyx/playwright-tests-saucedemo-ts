@@ -6,6 +6,9 @@ import { CheckoutInformationPage } from '../Pages/CheckoutInformationPage'
 import { CheckoutOverviewPage } from '../Pages/CheckoutOverviewPage'
 import { CheckoutCompletePage } from '../Pages/CheckoutCompletePage'
 
+const user = process.env.LOGIN_USER!
+const password = process.env.LOGIN_PASSWORD!
+
 const produtos = ['Sauce Labs Backpack', 'Sauce Labs Bike Light']
 
 test('You must successfully make a purchase on SauceDemo', async ({ page }) => {
@@ -18,7 +21,7 @@ test('You must successfully make a purchase on SauceDemo', async ({ page }) => {
 
   // Login
   await loginPage.goto()
-  await loginPage.fillLogin('standard_user', 'secret_sauce')
+  await loginPage.fillLogin(user, password)
 
   // Add products and go to cart
   await homePage.addProductsToCart(produtos)

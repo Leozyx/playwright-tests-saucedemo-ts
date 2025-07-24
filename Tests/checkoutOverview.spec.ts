@@ -5,6 +5,9 @@ import { YourCartPage } from '../Pages/YourCartPage'
 import { CheckoutInformationPage } from '../Pages/CheckoutInformationPage'
 import { CheckoutOverviewPage } from '../Pages/CheckoutOverviewPage'
 
+const user = process.env.LOGIN_USER!
+const password = process.env.LOGIN_PASSWORD!
+
 const produtos = ['Sauce Labs Backpack', 'Sauce Labs Bike Light']
 
 test('successfully complete purchase', async ({ page }) => {
@@ -15,7 +18,7 @@ test('successfully complete purchase', async ({ page }) => {
   const overviewPage = new CheckoutOverviewPage(page)
 
   await loginPage.goto()
-  await loginPage.fillLogin('standard_user', 'secret_sauce')
+  await loginPage.fillLogin(user, password)
 
   await homePage.addProductsToCart(produtos)
   await homePage.goToCart()
